@@ -1,0 +1,59 @@
+{
+  "project_info": {
+    "project_number": "1086991853517",
+    "firebase_url": "https://novalista-51cac.firebaseio.com",
+    "project_id": "novalista-51cac",
+    "storage_bucket": "novalista-51cac.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1086991853517:android:2fea5e9c3d8c5def",
+        "android_client_info": {
+          "package_name": "com.utils.novalista"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1086991853517-q9osglhth1u1uhh4jn85n7814pct7ih7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.utils.novalista",
+            "certificate_hash": "f9c683889fb7e697735c3086902bad1eab2c91ff"
+          }
+        },
+        {
+          "client_id": "1086991853517-6itlu78sjqbnp76st03p8umj3kdq8ad8.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "1086991853517-6itlu78sjqbnp76st03p8umj3kdq8ad8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDVldyWXpqUEvk4ae0u3BY6IRddhKTFRRo"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1086991853517-6itlu78sjqbnp76st03p8umj3kdq8ad8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

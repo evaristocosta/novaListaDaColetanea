@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:fillViewport="true"
+    tools:context="com.utils.novalista.Sobre">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            style="@style/CardList">
+
+            <LinearLayout
+                style="@style/Card"
+                android:gravity="center">
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_margin="6dp"
+                    android:src="@drawable/web_hi_res_512" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/app_name"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorPrimary"/>
+
+                <TextView
+                    android:id="@+id/versionControl"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text=""/>
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/Card"
+                android:gravity="center">
+
+                <TextView
+                    style="@style/CardHeader"
+                    android:text="@string/descr"
+                    android:textColor="@color/colorPrimary"/>
+                <TextView
+                    style="@style/About.Item"
+                    android:text="@string/sobre_msg"/>
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/Card"
+                android:gravity="center">
+                <TextView
+                    style="@style/CardHeader"
+                    android:text="@string/link"
+                    android:textColor="@color/colorPrimary"/>
+                <TextView
+                    style="@style/About.Item"
+                    android:text="@string/prob"/>
+                <Button
+                    android:id="@+id/suges"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:layout_gravity="left"
+                    android:textSize="16sp"
+                    android:textColor="#7b7b7b"
+                    android:background="@android:color/transparent"
+                    android:text="@string/suges"
+                    android:autoLink="email"
+                    android:textAllCaps="false"/>
+                <Button
+                    android:id="@+id/cod_font"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:layout_gravity="left"
+                    android:textSize="16sp"
+                    android:textColor="#7b7b7b"
+                    android:background="@android:color/transparent"
+                    android:text="@string/cod_font"
+                    android:autoLink="web"
+                    android:textAllCaps="false"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/Card"
+                android:gravity="center">
+                <TextView
+                    style="@style/CardHeader"
+                    android:text="@string/desenvolv"
+                    android:textColor="@color/colorPrimary"/>
+                <TextView
+                    style="@style/About.Item"
+                    android:text="Lucas Costa"/>
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/Card"
+                android:gravity="center">
+                <TextView
+                    style="@style/CardHeader"
+                    android:text="@string/img_cop"
+                    android:textColor="@color/colorPrimary"/>
+                <TextView
+                    style="@style/About.Item"
+                    android:text="Smashicons"/>
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</RelativeLayout>

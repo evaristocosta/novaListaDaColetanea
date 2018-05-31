@@ -1,0 +1,24 @@
+# depslib dependency file v1.0
+1527516625 source:/home/lucas/novaLista/preparadorDoTxt/main.cpp
+	<iostream>
+	"preparador.h"
+	"comparador.h"
+
+1527516190 /home/lucas/novaLista/preparadorDoTxt/preparador.h
+	<fstream>
+
+1527516011 source:/home/lucas/novaLista/preparadorDoTxt/preparador.cpp
+	"preparador.h"
+	<iostream>
+	<fstream>
+
+1527524705 /home/lucas/novaLista/preparadorDoTxt/comparador.h
+	<fstream>
+
+1527535992 source:/home/lucas/novaLista/preparadorDoTxt/comparador.cpp
+	"preparador.h"
+	<iostream>
+	<fstream>
+	<iostream>
+	"comparador.h"
+

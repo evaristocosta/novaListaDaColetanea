@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">Nova Lista da Coletânea</string>
+    <string name="app_name_splash">Nova Lista \nda Coletânea</string>
+
+    <string name="searchHint">Nome ou nº do hino…</string>
+
+    <!-- SEÇÃO SOBRE -->
+    <string name="about">Sobre</string>
+
+    <string name="link">Links</string>
+    <string name="prob">Encontrou algum erro? Tem novas ideias?</string>
+    <string name="suges">Envie para o desenvolvedor</string>
+    <string name="cod_font">Ver código-fonte no Github</string>
+
+    <string name="desenvolv">Desenvolvedor</string>
+
+    <string name="img_cop">Direitos das imagens usadas</string>
+
+    <string name="descr">Descrição</string>
+    <string name="sobre_msg">
+        A Nova Lista da Coletânea contém o índice do novo hinário da Igreja Cristã Maranata somado ao
+        índice antigo, com intuito de facilitar a busca do número antigo frente ao novo número na
+        coletânea atualizada. O aplicativo não tem qualquer vínculo oficial com a ICM e é livre, de código
+        aberto.
+    </string>
+</resources>
