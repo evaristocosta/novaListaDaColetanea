@@ -17,16 +17,19 @@ import android.widget.TextView;
 
 import java.text.Normalizer;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class IndiceActivity extends AppCompatActivity {
+
+    //imutável pra pesquisa
+    ArrayList<String> hinosSemAcento = new ArrayList<>();
     //receptores das string do "bd"
-    ArrayList<String> hinos = new ArrayList<>();
-    ArrayList<String> numAntigo = new ArrayList<>();
-    ArrayList<String> numNovo = new ArrayList<>();
+    ArrayList<String> hinos;
+    ArrayList<String> hinosNA;
+    ArrayList<String> numAntigo;
+    ArrayList<String> numNovo;
 
     //linhas sem acentos
-    String sNA, itemNA;
+    String sNA;
 
     //adaptador e interfaceamento
     HinosAdapter adapter;
@@ -41,11 +44,8 @@ public class IndiceActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_indice);
 
-        //preenche strings de trabalho
-        for (int i = 0, j = HinosData.NUMANTIGO.length; i<j; i++) {
-            numAntigo.add(HinosData.NUMANTIGO[i]);
-            numNovo.add(HinosData.NUMNOVO[i]);
-            hinos.add(HinosData.HINOS[i]);
+        for (int i = 0, j = HinosData.HINOS.length; i<j; i++) {
+            hinosSemAcento.add(removeDiacriticalMarks(HinosData.HINOS[i]));
         }
 
         listaHinos = findViewById(R.id.lista);
@@ -70,10 +70,10 @@ public class IndiceActivity extends AppCompatActivity {
                 } else {
                     if (j > sNA.length()) {
                         iniciaLista();
-                        busca(sNA);
+                        busca(sNA.toUpperCase());
                         j = sNA.length();
                     } else {
-                        busca(sNA);
+                        busca(sNA.toUpperCase());
                         j = sNA.length();
                     }
                 }
@@ -95,10 +95,10 @@ public class IndiceActivity extends AppCompatActivity {
         //diferencia busca numérica de textual
         if(!TextUtils.isDigitsOnly(textoDePesquisa)){
             i=1;
-            for(String item:HinosData.HINOS){
-                itemNA = removeDiacriticalMarks(item);
-                if(!itemNA.contains(textoDePesquisa.toUpperCase())){
-                    if(hinos.remove(item)) {
+            for(String item:hinosSemAcento){
+                if(!item.contains(textoDePesquisa)){
+                    if (hinosNA.remove(item)) {
+                        hinos.remove(i-1);
                         numAntigo.remove(i-1);
                         numNovo.remove(i-1);
                     }
@@ -117,9 +117,11 @@ public class IndiceActivity extends AppCompatActivity {
                         numAntigo.remove(item1);
                         numNovo.remove(item2);
                         hinos.remove(i-1);
-                        i--;
+                    } else {
+                        i++;
                     }
                 }
+                i--;
             }
         }
         adapter.notifyDataSetChanged();
@@ -127,12 +129,20 @@ public class IndiceActivity extends AppCompatActivity {
 
     // inicializador da lista
     public void iniciaLista() {
-        hinos = new ArrayList<>(Arrays.asList(HinosData.HINOS));
-        numNovo = new ArrayList<>(Arrays.asList(HinosData.NUMNOVO));
-        numAntigo = new ArrayList<>(Arrays.asList(HinosData.NUMANTIGO));
+        hinos = new ArrayList<>();
+        hinosNA = new ArrayList<>();
+        numAntigo = new ArrayList<>();
+        numNovo = new ArrayList<>();
+
+        for (int i = 0, j = HinosData.NUMANTIGO.length; i<j; i++) {
+            numAntigo.add(HinosData.NUMANTIGO[i]);
+            numNovo.add(HinosData.NUMNOVO[i]);
+            hinos.add(HinosData.HINOS[i]);
+            hinosNA.add(hinosSemAcento.get(i));
+
+        }
 
         adapter = new HinosAdapter();
-
         listaHinos.setAdapter(adapter);
     }
 
