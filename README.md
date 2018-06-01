@@ -3,5 +3,6 @@ A Nova Lista da Coletânea contém o índice do novo hinário da Igreja Cristã 
 
 ![alt text](https://i.imgur.com/BiU7k4O.png)
 
-A busca funciona tanto para nome, número antigo ou número da coletânea nova.
+A busca funciona tanto para nome ou número da coletânea nova. Acompanhamento de desenvolvimento mais detalhado a cada atualização pode ser acompanhado em https://lucascostaportfolio.wordpress.com/2018/05/30/nova-lista-da-coletanea/ 
+
 Problemas, sugestões e ideias, não exite em compartilhar!
