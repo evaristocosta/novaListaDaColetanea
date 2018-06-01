@@ -56,37 +56,34 @@ public class IndiceActivity extends AppCompatActivity {
 
         //funcionamento da barra de pesquisa
         editText.addTextChangedListener(new TextWatcher() {
+
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
 
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            public void onTextChanged(CharSequence s, int start, int before, int count) {}
+
+
+            @Override
+            public void afterTextChanged(Editable s) {
                 //entrada sem acentos
                 sNA = removeDiacriticalMarks(s.toString());
-                // se for vazia, inicia. Se for maior q entrada anterior,
-                // busca. Se for menor, reinicia e busca
+                // se for vazia, inicia. Se não, inicia e busca
+                // acontece pra previnir trocas de corretor automático
                 if (sNA.equals("")) {
                     iniciaLista();
                 } else {
-                    if (j > sNA.length()) {
-                        iniciaLista();
-                        busca(sNA.toUpperCase());
-                        j = sNA.length();
-                    } else {
-                        busca(sNA.toUpperCase());
-                        j = sNA.length();
-                    }
+                    iniciaLista();
+                    busca(sNA.toUpperCase());
                 }
             }
-
-            @Override
-            public void afterTextChanged(Editable s) {}
         });
     }
 
     // método de remoção de acentos
     public static String removeDiacriticalMarks(String string) {
-        return Normalizer.normalize(string, Normalizer.Form.NFD)
+        String newString = string.replaceAll(",","");
+        return Normalizer.normalize(newString, Normalizer.Form.NFD)
                 .replaceAll("\\p{InCombiningDiacriticalMarks}+", "");
     }
 
@@ -201,24 +198,4 @@ public class IndiceActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
-
-
-
-    // método de busca antigo
-    /*
-    public void buscaPorNome(String textoDePesquisa) {
-        for(String item:HinosData.HINOS){
-            itemNA = removeDiacriticalMarks(item);
-            if(!itemNA.contains(textoDePesquisa)){
-               if(hinos.remove(item)) {
-                   numAntigo.remove(i-1);
-                   numNovo.remove(i-1);
-               }
-            } else {
-                i++;
-            }
-        }
-        i=1;
-        adapter.notifyDataSetChanged();
-    }*/
 }
