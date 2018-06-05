@@ -1,11 +1,17 @@
 package com.utils.novalista;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.support.annotation.NonNull;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,10 +21,18 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.messaging.FirebaseMessagingService;
+import com.google.firebase.messaging.RemoteMessage;
+import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
+
 import java.text.Normalizer;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
-public class IndiceActivity extends AppCompatActivity {
+public class IndiceActivity extends AppCompatActivity implements ForceUpdateChecker.OnUpdateNeededListener {
 
     //imutável pra pesquisa
     ArrayList<String> hinosSemAcento = new ArrayList<>();
@@ -36,6 +50,8 @@ public class IndiceActivity extends AppCompatActivity {
     ListView listaHinos;
     EditText editText;
 
+    private static final String TAG = IndiceActivity.class.getSimpleName();
+
     //contadores de controle
     int i = 1, j = 0, k=0;
 
@@ -43,6 +59,29 @@ public class IndiceActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_indice);
+
+        final FirebaseRemoteConfig firebaseRemoteConfig = FirebaseRemoteConfig.getInstance();
+
+        Map<String, Object> remoteConfigDefaults = new HashMap();
+        remoteConfigDefaults.put(ForceUpdateChecker.KEY_UPDATE_REQUIRED, false);
+        remoteConfigDefaults.put(ForceUpdateChecker.KEY_CURRENT_VERSION, "1.0.0");
+        remoteConfigDefaults.put(ForceUpdateChecker.KEY_UPDATE_URL,
+                "https://lucascostaportfolio.wordpress.com/2018/05/30/nova-lista-da-coletanea/");
+
+        firebaseRemoteConfig.setDefaults(remoteConfigDefaults);
+        firebaseRemoteConfig.fetch(60) // fetch every minutes
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            Log.d(TAG, "remote config is fetched.");
+                            firebaseRemoteConfig.activateFetched();
+                        }
+                    }
+                });
+
+
+        ForceUpdateChecker.with(this).onUpdateNeeded(this).check();
 
         for (int i = 0, j = HinosData.HINOS.length; i<j; i++) {
             hinosSemAcento.add(removeDiacriticalMarks(HinosData.HINOS[i]));
@@ -111,9 +150,10 @@ public class IndiceActivity extends AppCompatActivity {
                 if(!item1.contains(textoDePesquisa) && !item2.contains(textoDePesquisa)) {
                     // faz remoção apenas se ambos contém a string
                     if(numAntigo.contains(item1) && numNovo.contains(item2)) {
-                        numAntigo.remove(item1);
-                        numNovo.remove(item2);
+                        numAntigo.remove(i-1);
+                        numNovo.remove(i-1);
                         hinos.remove(i-1);
+                        hinosNA.remove(i-1);
                     } else {
                         i++;
                     }
@@ -198,4 +238,35 @@ public class IndiceActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+
+
+    // checagem de atualização
+    @Override
+    public void onUpdateNeeded(final String updateUrl) {
+        AlertDialog dialog = new AlertDialog.Builder(this)
+                .setTitle("Nova versão disponível!")
+                .setMessage("Uma nova versão, com melhorias e correções, foi disponibilizada.")
+                .setPositiveButton("Atualizar agora",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                redirectStore(updateUrl);
+                            }
+                        }).setNegativeButton("Cancelar",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                finish();
+                            }
+                        }).create();
+        dialog.show();
+    }
+
+    private void redirectStore(String updateUrl) {
+        final Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(updateUrl));
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+    }
+
 }

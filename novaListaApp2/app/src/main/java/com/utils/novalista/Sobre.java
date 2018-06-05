@@ -31,6 +31,16 @@ public class Sobre extends AppCompatActivity {
         TextView vname = findViewById(R.id.versionControl);
         vname.setText(versionName);
 
+        Button atualizate = findViewById(R.id.atualizar);
+        atualizate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent browser = new Intent(Intent.ACTION_VIEW,
+                        Uri.parse("https://lucascostaportfolio.wordpress.com/2018/05/30/nova-lista-da-coletanea"));
+                startActivity(browser);
+            }
+        });
+
         Button git = findViewById(R.id.cod_font);
         git.setOnClickListener(new View.OnClickListener() {
             @Override

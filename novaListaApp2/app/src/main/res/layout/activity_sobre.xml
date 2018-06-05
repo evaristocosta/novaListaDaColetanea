@@ -74,6 +74,17 @@
                     android:autoLink="email"
                     android:textAllCaps="false"/>
                 <Button
+                    android:id="@+id/atualizar"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:layout_gravity="left"
+                    android:textSize="16sp"
+                    android:textColor="#7b7b7b"
+                    android:background="@android:color/transparent"
+                    android:text="@string/atual"
+                    android:autoLink="web"
+                    android:textAllCaps="false"/>
+                <Button
                     android:id="@+id/cod_font"
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
