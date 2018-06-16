@@ -8,6 +8,9 @@ import android.os.Handler;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MotionEvent;
+import android.widget.ImageView;
+
+import java.util.Random;
 
 /**
  * Created by lucas on 14/03/18.
@@ -16,11 +19,31 @@ import android.view.MotionEvent;
 public class SplashScreen extends AppCompatActivity {
     Handler handle;
     Runnable runnable;
+    ImageView splashChoice;
+    int[] imageList;
+    Random random;
+    int posicao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
+
+        imageList = new int[]{
+                R.drawable.splash3,
+                R.drawable.splash4,
+                R.drawable.splash6,
+                R.drawable.splash7,
+                R.drawable.dica1,
+                R.drawable.dica2,
+                R.drawable.dica3,
+                R.drawable.dica4};
+
+        random = new Random(System.currentTimeMillis());
+        posicao = random.nextInt(imageList.length - 1);
+
+        splashChoice = findViewById(R.id.splash);
+        splashChoice.setImageResource(imageList[posicao]);
 
         handle = new Handler();
         runnable = new Runnable() {

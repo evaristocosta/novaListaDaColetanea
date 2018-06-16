@@ -46,7 +46,7 @@ public class Sobre extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent browser = new Intent(Intent.ACTION_VIEW,
-                        Uri.parse("https://github.com/evaristocosta/novaListaDaColetanea"));
+                        Uri.parse("https://gitlab.com/evaristocosta/novaListaDaColetanea"));
                 startActivity(browser);
             }
         });

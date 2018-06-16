@@ -129,7 +129,41 @@ public class IndiceActivity extends AppCompatActivity implements ForceUpdateChec
     // método de busca
     public void busca(String textoDePesquisa) {
         //diferencia busca numérica de textual
-        if(!TextUtils.isDigitsOnly(textoDePesquisa)){
+        if (textoDePesquisa.equals("ENTRARAM") || textoDePesquisa.equals("ENTRARAM ")) {
+            i=hinos.size();
+            for(k=(HinosData.NUMANTIGO.length-1); k>=0; k--) {
+                String item1 = HinosData.NUMANTIGO[k];
+                if(!item1.contains("-")) {
+                    // faz remoção apenas se ambos contém a string
+                    if(numAntigo.contains(item1)) {
+                        numAntigo.remove(i-1);
+                        numNovo.remove(i-1);
+                        hinos.remove(i-1);
+                        hinosNA.remove(i-1);
+                    } else {
+                        i++;
+                    }
+                }
+                i--;
+            }
+        } else if (textoDePesquisa.equals("SAIRAM") || textoDePesquisa.equals("SAIRAM ")) {
+            i=hinos.size();
+            for(k=(HinosData.NUMNOVO.length-1); k>=0; k--) {
+                String item1 = HinosData.NUMNOVO[k];
+                if(!item1.contains("-")) {
+                    // faz remoção apenas se ambos contém a string
+                    if(numNovo.contains(item1)) {
+                        numAntigo.remove(i-1);
+                        numNovo.remove(i-1);
+                        hinos.remove(i-1);
+                        hinosNA.remove(i-1);
+                    } else {
+                        i++;
+                    }
+                }
+                i--;
+            }
+        } else if(!TextUtils.isDigitsOnly(textoDePesquisa)){
             i=1;
             for(String item:hinosSemAcento){
                 if(!item.contains(textoDePesquisa)){
@@ -257,9 +291,10 @@ public class IndiceActivity extends AppCompatActivity implements ForceUpdateChec
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                finish();
+                                dialog.cancel();
                             }
                         }).create();
+
         dialog.show();
     }
 
